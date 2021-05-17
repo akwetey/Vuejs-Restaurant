@@ -1,38 +1,99 @@
 <template>
   <div class="store-list">
-    <p>Here you can find all of our restaurants. We have {{ storesCount }} stores right now!</p>
-    <Store class="store-list__item" :title="store.name" :photo="store.image" :location="store.location" v-for="store in storesWithImages" :key="store.id" />
+    <p>
+      Here you can find all of our restaurants. We have {{ storesCount }} stores
+      right now!
+    </p>
+    <input
+      type="search"
+      v-model="search"
+      style="margin-bottom:2rem;"
+      @keyup="filteredRecords"
+    />
+    <template v-if="storesWithImages.length">
+      <Store
+        class="store-list__item"
+        :title="store.name"
+        :photo="store.image"
+        :location="store.location"
+        v-for="store in storesWithImages"
+        :key="store.id"
+      />
+      <button @click="loadMore" style="margin:30px; text-align:center;">
+        Load More
+      </button>
+    </template>
+    <template v-else>
+      <div style="text-align:center">
+        <h4>No data found</h4>
+      </div>
+    </template>
   </div>
 </template>
 <style lang="scss">
-@import './StoreList.scss';
+@import "./StoreList.scss";
 </style>
 <script>
-import Store from '@/components/Store/Store';
-import _ from 'lodash';
+import Store from "@/components/Store/Store";
+import _ from "lodash";
 
 export default {
-  name: 'StoreList',
+  name: "StoreList",
   components: {
-    Store
+    Store,
   },
   props: {
     stores: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
+  },
+  data() {
+    return {
+      size: 10,
+      search: "",
+      mutabelStore: this.stores,
+    };
   },
   computed: {
-    storesWithImages () {
-      return _.map(this.stores, function (store) {
-        store['image'] = 'https://via.placeholder.com/300?text=' + store.name;
+    storesWithImages() {
+      let store = this.mutabelStore.slice(0, this.size).map((item) => ({
+        ...item,
+        image: "https://via.placeholder.com/300?text=" + item.name,
+      }));
 
-        return store;
-      });
+      return store;
     },
-    storesCount () {
+    storesCount() {
       return _.size(this.stores);
-    }
-  }
-}
+    },
+  },
+
+  watch: {
+    search(n) {
+      if (n) {
+        this.filteredRecords();
+        this.mutabelStore = this.stores;
+        this.size = 10;
+      } else {
+        this.search = "";
+        this.mutabelStore = this.stores;
+        this.size = 10;
+      }
+    },
+  },
+
+  methods: {
+    loadMore() {
+      if (this.size < this.storesCount) {
+        this.size = this.size + 10;
+      }
+    },
+    filteredRecords() {
+      this.mutabelStore = this.mutabelStore.filter((item) =>
+        item.name.toLowerCase().includes(this.search.toLowerCase())
+      );
+    },
+  },
+};
 </script>
