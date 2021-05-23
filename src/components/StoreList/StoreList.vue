@@ -1,24 +1,34 @@
 <template>
   <div class="store-list">
-    <p>
-      Here you can find all of our restaurants. We have {{ storesCount }} stores
-      right now!
-    </p>
-    <input
-      type="search"
-      v-model="search"
-      style="margin-bottom:2rem;"
-      @keyup="filteredRecords"
-    />
+    <div class="d-flex mb-5">
+      <p>
+        Here you can find all of our restaurants. We have
+        {{ storesCount }} stores right now!
+      </p>
+      <div class="ml-auto">
+        <input
+          type="search"
+          v-model="search"
+          class="form-control"
+          @keyup="filteredRecords"
+        />
+      </div>
+    </div>
     <template v-if="storesWithImages.length">
-      <Store
-        class="store-list__item"
-        :title="store.name"
-        :photo="store.image"
-        :location="store.location"
-        v-for="store in storesWithImages"
-        :key="store.id"
-      />
+      <div class="row">
+        <div
+          class="col-sm-12 col-md-3 col-lg-3"
+          v-for="store in storesWithImages"
+          :key="store.id"
+        >
+          <Store
+            class="store-list__item"
+            :title="store.name"
+            :photo="store.image"
+            :location="store.location"
+          />
+        </div>
+      </div>
       <button @click="loadMore" style="margin:30px; text-align:center;">
         Load More
       </button>

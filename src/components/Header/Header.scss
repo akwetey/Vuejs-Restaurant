@@ -21,11 +21,16 @@
         color: var(--color-primary);
 
         &:hover {
+          text-decoration: none;
           color: var(--color-highlight);
         }
       }
     }
   }
+}
+
+.router-link-exact-active {
+  border-bottom: 2px solid #000000;
 }
 
 @media (min-width: 1200px) {
