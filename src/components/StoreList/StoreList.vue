@@ -11,6 +11,7 @@
           v-model="search"
           class="form-control"
           @keyup="filteredRecords"
+          placeholder="Type here to search"
         />
       </div>
     </div>
@@ -29,9 +30,11 @@
           />
         </div>
       </div>
-      <button @click="loadMore" style="margin:30px; text-align:center;">
-        Load More
-      </button>
+      <div class="text-center">
+        <button @click="loadMore" class="btn btn-secondary my-3">
+          Load More
+        </button>
+      </div>
     </template>
     <template v-else>
       <div style="text-align:center">
@@ -45,7 +48,6 @@
 </style>
 <script>
 import Store from "@/components/Store/Store";
-import _ from "lodash";
 
 export default {
   name: "StoreList",
@@ -56,6 +58,7 @@ export default {
     stores: {
       type: Array,
       default: () => [],
+      required: true,
     },
   },
   data() {
@@ -75,7 +78,7 @@ export default {
       return store;
     },
     storesCount() {
-      return _.size(this.stores);
+      return this.stores.length;
     },
   },
 

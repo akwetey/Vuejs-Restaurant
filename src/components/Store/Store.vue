@@ -17,14 +17,17 @@ export default {
     title: {
       type: String,
       default: null,
+      required: true,
     },
     location: {
       type: String,
       default: null,
+      required: true,
     },
     photo: {
       type: String,
       default: null,
+      required: true,
     },
   },
   computed: {

@@ -5,26 +5,28 @@
 </template>
 
 <script>
-import moment from 'moment';
-
+const dayjs = require("dayjs");
+const advancedFormat = require("dayjs/plugin/advancedFormat");
+dayjs.extend(advancedFormat);
 export default {
-  name: 'Home',
-  data () {
+  name: "Home",
+  data() {
     return {
-      currentTime: moment().format('dddd, MMMM Do YYYY, h:mm:ss a')
-    }
+      currentTime: dayjs().format("dddd, MMMM Do YYYY, h:mm:ss a"),
+    };
   },
   computed: {
-    welcomeMessage () {
-      return 'Welcome! Your local time is: ' + this.currentTime;
-    }
+    welcomeMessage() {
+      return "Welcome! Your local time is: " + this.currentTime;
+    },
   },
   mounted() {
-    const setTimer = () => setTimeout(() => {
-      this.currentTime = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
-      setTimer();
-    }, 1000);
+    const setTimer = () =>
+      setTimeout(() => {
+        this.currentTime = dayjs().format("dddd, MMMM Do YYYY, h:mm:ss a");
+        setTimer();
+      }, 1000);
     setTimer();
-  }
-}
+  },
+};
 </script>
