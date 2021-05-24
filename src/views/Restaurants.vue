@@ -46,8 +46,13 @@ export default {
 
     setTimer();
 
+    //  get json data
     const { default: json } = await import("@/assets/stores/stores.json");
-    this.stores = json;
+    const { default: json1 } = await import("@/assets/stores/stores1.json");
+    const { default: json2 } = await import("@/assets/stores/stores2.json");
+
+    // merge data into one array
+    this.stores = [...json, ...json1, ...json2];
   },
 };
 </script>
