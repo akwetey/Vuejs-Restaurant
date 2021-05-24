@@ -2,7 +2,7 @@
   <div class="page page__carbonara container my-5">
     <h1>Pasta carbonara meals</h1>
     <div class="page__carbonara-meals">
-      <RecipeForm :ingredients="secretIngredients" />
+      <RecipeForm />
     </div>
   </div>
 </template>
@@ -13,18 +13,6 @@ export default {
   name: "Meals",
   components: {
     RecipeForm,
-  },
-  data() {
-    return {
-      secretIngredients: {
-        pasta: 500,
-        bacon: 200,
-        eggs: 1,
-        milk: 200,
-        butter: 500,
-        oil: 100,
-      },
-    };
   },
 };
 </script>

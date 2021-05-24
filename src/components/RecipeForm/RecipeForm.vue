@@ -14,7 +14,7 @@
               type="number"
               name="eggs"
               id="recipe-eggs"
-              value="0"
+              v-model="secretIngredients.eggs"
               min="0"
             />
           </div>
@@ -27,7 +27,7 @@
               type="number"
               name="pasta"
               id="recipe-pasta"
-              value="0"
+              v-model="secretIngredients.pasta"
               min="0"
             />
           </div>
@@ -40,7 +40,7 @@
               type="number"
               name="butter"
               id="recipe-butter"
-              value="0"
+              v-model="secretIngredients.butter"
               min="0"
             />
           </div>
@@ -53,7 +53,7 @@
               type="number"
               name="milk"
               id="recipe-milk"
-              value="0"
+              v-model="secretIngredients.milk"
               min="0"
             />
           </div>
@@ -66,7 +66,7 @@
               type="number"
               name="oil"
               id="recipe-oil"
-              value="0"
+              v-model="secretIngredients.oil"
               min="0"
             />
           </div>
@@ -79,7 +79,7 @@
               type="number"
               name="bacon"
               id="recipe-bacon"
-              value="0"
+              v-model="secretIngredients.bacon"
               min="0"
             />
           </div>
@@ -102,17 +102,21 @@ export default {
   data() {
     return {
       meals: 0,
+      secretIngredients: {
+        pasta: 0,
+        bacon: 0,
+        eggs: 0,
+        milk: 0,
+        butter: 0,
+        oil: 0,
+      },
     };
-  },
-  props: {
-    ingredients: {
-      type: Object,
-      default: () => ({}),
-    },
   },
   methods: {
     calculate(event) {
       event.preventDefault();
+      this.$store.commit("MY_INGREDIENTS", this.secretIngredients);
+      this.$router.push({ name: "My-Meal" });
     },
   },
 };

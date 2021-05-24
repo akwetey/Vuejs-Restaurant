@@ -1,65 +1,104 @@
 <template>
-  <div class="banner" :class="bannerStyles">
+  <div class="banner">
     <div class="banner__wrapper">
-      <div class="banner__image" v-if="backgroundMedia.type === 'image'">
-        <img class="banner__image-asset" :src="backgroundMedia.src" :alt="text" :title="text" />
-      </div>
-      <div class="banner__video" v-if="backgroundMedia.type === 'video'">
-        <video class="banner__video-asset" autoplay muted>
-          <source :src="backgroundMedia.src" type="video/mp4" />
-        </video>
-      </div>
-      <div class="banner__text" v-if="text">
-        <span class="banner__text-message">{{ text }}</span>
+      <div v-if="text">
+        <div class=" text-center mt-5">
+          <h5>Welcome to: {{ text }}</h5>
+        </div>
+        <p>Your ingredients for Carbonara meal</p>
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table table-borderless w-50 mb-0">
+              <tr>
+                <th><h5>Number of butter:</h5></th>
+                <td>
+                  <h5>{{ getIngredient.butter || 0 }}</h5>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table table-borderless w-50 mb-0">
+              <tr>
+                <th><h5>Number of eggs:</h5></th>
+                <td>
+                  <h5>{{ getIngredient.eggs || 0 }}</h5>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table table-borderless w-50 mb-0">
+              <tr>
+                <th><h5>Number of pasta:</h5></th>
+                <td>
+                  <h5>{{ getIngredient.pasta || 0 }}</h5>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table table-borderless w-50 mb-0">
+              <tr>
+                <th><h5>Number of oils:</h5></th>
+                <td>
+                  <h5>{{ getIngredient.oil || 0 }}</h5>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table table-borderless w-50 mb-0">
+              <tr>
+                <th><h5>Number of bacon:</h5></th>
+                <td>
+                  <h5>{{ getIngredient.bacon || 0 }}</h5>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table table-borderless w-50 mb-0">
+              <tr>
+                <th><h5>Number of milk:</h5></th>
+                <td>
+                  <h5>{{ getIngredient.milk || 0 }}</h5>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="mt-5">
+          <h5>
+            The number of meals from the ingredients above is
+            {{ randomMealNumber }} meals
+          </h5>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <style lang="scss">
-@import './Banner.scss';
+@import "./Banner.scss";
 </style>
 <script>
 export default {
-  name: 'Banner',
+  name: "Banner",
   props: {
-    backgroundMedia: {
-      type: Object,
-      default: () => ({
-        type: null, // image/video
-        src: null
-      })
-    },
     text: {
       type: String,
-      default: null
+      default: null,
     },
-    textDistribution: {
-      type: String,
-      default: 'over' // top | over | bottom
+    getIngredient: {
+      type: Object,
+      default: () => {},
+      required: true,
     },
-    textVerticalAlignment: {
-      type: String,
-      default: 'center' // top | center | bottom
+    randomMealNumber: {
+      type: Number,
+      default: 0,
+      required: true,
     },
-    textHorizontalAlignment: {
-      type: String,
-      default: 'center' // left || center || right
-    }
   },
-  computed: {
-    bannerStyles () {
-      return {
-        'banner__text-distribution-over': this.textDistribution === 'over',
-        'banner__text-distribution-top': this.textDistribution === 'top',
-        'banner__text-distribution-bottom': this.textDistribution === 'bottom',
-        'banner__text-horizontal-left': this.textHorizontalAlignment === 'left',
-        'banner__text-horizontal-center': this.textHorizontalAlignment === 'center',
-        'banner__text-horizontal-right': this.textHorizontalAlignment === 'right',
-        'banner__text-vertical-top': this.textVerticalAlignment === 'top',
-        'banner__text-vertical-center': this.textVerticalAlignment === 'center',
-        'banner__text-vertical-bottom': this.textVerticalAlignment === 'bottom',
-      };
-    }
-  }
-}
+};
 </script>
