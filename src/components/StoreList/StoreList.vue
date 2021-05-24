@@ -91,20 +91,17 @@ export default {
         this.search = "";
         this.mutabelStore = this.stores;
         this.size = 10;
+        this.toogleELements();
       }
     },
   },
 
   mounted() {
+    //  get value from local storage
     const localTheme = localStorage.getItem("theme");
-    const highlightedItems = document.querySelectorAll(".store__wrapper");
-    highlightedItems.forEach((item) => {
-      item.setAttribute("data-wrapper", localTheme);
-    });
-    const highlighted = document.querySelectorAll(".store__location");
-    highlighted.forEach((item) => {
-      item.setAttribute("data-span", localTheme);
-    });
+
+    //  set element attributes
+    this.toogleELements(localTheme);
   },
 
   methods: {
@@ -114,14 +111,7 @@ export default {
 
         // set attribute for new elements
         this.$nextTick(() => {
-          const highlightedItems = document.querySelectorAll(".store__wrapper");
-          highlightedItems.forEach((item) => {
-            item.setAttribute("data-wrapper", "darkMode");
-          });
-          const highlighted = document.querySelectorAll(".store__location");
-          highlighted.forEach((item) => {
-            item.setAttribute("data-span", "darkMode");
-          });
+          this.toogleELements();
         });
       }
     },
@@ -129,6 +119,18 @@ export default {
       this.mutabelStore = this.mutabelStore.filter((item) =>
         item.name.toLowerCase().includes(this.search.toLowerCase())
       );
+    },
+
+    toogleELements(mode = "darkMode") {
+      const highlightedItems = document.querySelectorAll(".store__wrapper");
+      highlightedItems.forEach((item) => {
+        item.setAttribute("data-wrapper", mode);
+      });
+
+      const highlighted = document.querySelectorAll(".store__location");
+      highlighted.forEach((item) => {
+        item.setAttribute("data-span", mode);
+      });
     },
   },
 };

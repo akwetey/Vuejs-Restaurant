@@ -67,38 +67,39 @@ export default {
       this.theme = this.theme === "darkMode" ? "" : "darkMode";
 
       //  set element attributes
-      document.body.setAttribute("data-theme", this.theme);
+      this.toggleElements(this.theme);
+
+      //   store current theme in local storage
+      localStorage.setItem("theme", this.theme);
+    },
+
+    toggleElements(mode) {
+      document.body.setAttribute("data-theme", mode);
+
+      const rows = document.querySelectorAll("tr");
+      rows.forEach((item) => {
+        item.setAttribute("data-theme", mode);
+      });
 
       const highlightedItems = document.querySelectorAll(".store__wrapper");
       highlightedItems.forEach((item) => {
-        item.setAttribute("data-wrapper", this.theme);
+        item.setAttribute("data-wrapper", mode);
       });
 
       const highlighted = document.querySelectorAll(".store__location");
       highlighted.forEach((item) => {
-        item.setAttribute("data-span", this.theme);
+        item.setAttribute("data-span", mode);
       });
-
-      localStorage.setItem("theme", this.theme);
     },
   },
   mounted() {
+    //  get value from local storage
     const localTheme = localStorage.getItem("theme");
 
     this.theme = localTheme;
 
     //  set elements attribute from local storage
-    document.body.setAttribute("data-theme", localTheme);
-
-    const highlightedItems = document.querySelectorAll(".store__wrapper");
-    highlightedItems.forEach((item) => {
-      item.setAttribute("data-wrapper", localTheme);
-    });
-
-    const highlighted = document.querySelectorAll(".store__location");
-    highlighted.forEach((item) => {
-      item.setAttribute("data-span", localTheme);
-    });
+    this.toggleElements(localTheme);
   },
 };
 </script>

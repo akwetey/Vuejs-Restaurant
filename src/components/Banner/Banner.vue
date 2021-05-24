@@ -100,5 +100,15 @@ export default {
       required: true,
     },
   },
+  mounted() {
+    //  get value from local storage
+    const localTheme = localStorage.getItem("theme");
+
+    //  set element attributes
+    const rows = document.querySelectorAll("tr");
+    rows.forEach((item) => {
+      item.setAttribute("data-theme", localTheme);
+    });
+  },
 };
 </script>
