@@ -1,13 +1,24 @@
-@import './variables/_color.scss';
-@import './variables/_spacing.scss';
+@import "./variables/_color.scss";
+@import "./variables/_spacing.scss";
 
-html, body {
+html,
+body {
   min-height: 100%;
   margin: 0;
   padding: 0;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+[data-theme="darkMode"] {
+  background-color: var(--color-black);
+  color: var(--color-white);
 }
 
 #app {
