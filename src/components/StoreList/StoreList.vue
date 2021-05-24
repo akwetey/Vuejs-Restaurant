@@ -81,7 +81,6 @@ export default {
       return this.stores.length;
     },
   },
-
   watch: {
     search(n) {
       if (n) {

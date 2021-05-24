@@ -26,7 +26,7 @@ const routes = [
     path: "/my-meal",
     name: "My-Meal",
     component: () =>
-      import(/* webpackChunkName: "MyMeals" */ "@/views/Restaurants.vue"),
+      import(/* webpackChunkName: "MyMeals" */ "@/views/MyMeals.vue"),
   },
 ];
 
