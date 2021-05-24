@@ -1,6 +1,6 @@
 <template>
   <div class="page page__stores">
-    <p>{{ welcomeMessage }}</p>
+    <p class="mt-3">{{ welcomeMessage }}</p>
     <div class="pages__stores-list">
       <StoreList :stores="stores" v-if="stores.length" />
     </div>

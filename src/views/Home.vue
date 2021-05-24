@@ -1,5 +1,5 @@
 <template>
-  <div class="page page__home">
+  <div class="page page__home mt-5">
     <p>{{ welcomeMessage }}</p>
   </div>
 </template>

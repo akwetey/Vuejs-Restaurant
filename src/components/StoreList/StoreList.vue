@@ -95,10 +95,34 @@ export default {
     },
   },
 
+  mounted() {
+    const localTheme = localStorage.getItem("theme");
+    const highlightedItems = document.querySelectorAll(".store__wrapper");
+    highlightedItems.forEach((item) => {
+      item.setAttribute("data-wrapper", localTheme);
+    });
+    const highlighted = document.querySelectorAll(".store__location");
+    highlighted.forEach((item) => {
+      item.setAttribute("data-span", localTheme);
+    });
+  },
+
   methods: {
     loadMore() {
       if (this.size < this.storesCount) {
         this.size = this.size + 10;
+
+        // set attribute for new elements
+        this.$nextTick(() => {
+          const highlightedItems = document.querySelectorAll(".store__wrapper");
+          highlightedItems.forEach((item) => {
+            item.setAttribute("data-wrapper", "darkMode");
+          });
+          const highlighted = document.querySelectorAll(".store__location");
+          highlighted.forEach((item) => {
+            item.setAttribute("data-span", "darkMode");
+          });
+        });
       }
     },
     filteredRecords() {
